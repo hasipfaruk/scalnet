@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+p{
+    font-family: "Rubik";
+    font-size: 18px;
+}
+ body{
+    background-color: #eceff3;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+ }
+.header{
+    position: relative;
+}
+.header .sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color:#2f3478;
+    /* background-color: #4B49AC; */
+    height: 80vh;
+    width: 190px;
+}
+.sidebar ul{
+    list-style: none;
+    margin-top: 50px;
+    font-family: "IBM Plex Sans";
+}
+
+.sidebar ul li{
+    padding: 5px 0px;
+    margin: 20px 10px;
+}
+.sidebar ul li i{
+    margin: 0px 3px;
+    margin-top: 10px;
+    color: white;
+    font-size: 15px;
+}
+.sidebar ul li a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+.bold-link {
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 2px;
+}
+
+/* .sidebar ul li a:hover{
+    background-color: white;
+    border-radius: 17px;
+    padding:8px;
+    color: #2f3478;
+} */
+.sidebar ul li a:hover {
+    background-color: #eee7ec;  /* Change to desired hover background color */
+    color: #6CBBFA !important;               /* Change to desired hover text color */
+    /* border-radius:25px  ; */
+    border-top-left-radius: 25px;   /* Top right corner radius */
+    border-bottom-left-radius: 25px; /* Bottom right corner radius */
+   } 
+.navbar{
+    position:relative;
+    width: 90%;
+    height: 50px;
+    background-color:white;
+    margin-left: 190px;
+    margin-top:-485px;
+}
+.header .rows{
+    margin: 0px 15px;
+    padding: 10px 0px;
+    margin-left: 210px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .rows .col{
+    background-color: white;
+    border: 1px solid white;
+    padding: 37px 91px;
+    border-radius: 5px;
+}
+.header .rows .col p{
+    margin-left: -73px;
+    margin-top: -25px;
+    font-size: 15px;
+    padding-bottom: 15px;
+    padding-right: 55px;
+
+}
+.header .rows .col h3{
+    margin-left: -73px;
+    margin-bottom: -25px;
+    padding-bottom: 30px;
+    font-weight: normal;
+}
+.header .rows .col h6{
+    margin-left: -73px;
+    margin-bottom: -25px;
+    padding-top: 30px;
+     font-weight: normal;
+}
+.header .Block{
+    background-color: white;
+    height: 267px;
+    width: 65%;
+    margin-left: 210px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.header .row2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .row2 .Block2{
+    background-color: green;
+    height: 267px;
+    margin-right: 15px;
+    width: 16.5%;
+    border-radius: 5px;
+}
+
+.header .row2 .Block2 .gren{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header .row2 .Block2 .gren h5{
+  color: white;
+  margin-top: 10px;
+}
+.header .row2 .Block2 .gren .circle{
+    margin-top: 53px;
+    border: 2px solid white;
+    padding: 25px 25px;
+    border-radius: 360px;
+    color: white;
+    align-items: center;
+}
+.header .row2 .Block2 .gren .circle h3{
+    align-items: center;
+    padding: 3px 0px;
+    margin-left: 12px;
+}
+.header .row2 .Block2 .gren .bot{
+    display: flex;
+    color: white;
+}
+.header .row2 .Block2 .gren .bot .bottext{
+    margin: 5px 12px;
+    padding-top:49px;
+}
+.header .row2 .Block2 .gren .bot .bottext h6{
+    margin-left: 13px;
+}
+.header .row2 .Block2 .gren .bot .bottext p{
+    font-size: 14px;
+    margin-top: 2px;
+}
+.header .container{
+    height: 267px;
+    width: 82%;
+    background-color: white;
+    margin-left: 210px;
+    margin-top: 10px;
+    border-radius: 5px;
+    /* border: 1px solid white; */
+    border: 1px solid white;
+    padding: 0px 25px;
+}
+.container nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0px;
+}
+.container nav input{
+    border: 1.5px solid #ddd;
+    border-radius: 25px;
+    padding: 3px 5px;
+}
+.container .empty{
+    padding-top: 3px;
+    border-bottom:1px solid #ddd ;
+}
+.container .tbl{
+    border-bottom:1px solid #ddd ;
+    overflow-y: auto;
+}
+.container .tbl table {
+    border-collapse: collapse;
+    width: 100%;
+    overflow-y: auto;
+}
+.container .tbl table td{
+    padding: 6px;
+    text-align: center !important;
+    border-bottom:1px solid #ddd ;
+    font-size: 12px;
+}
+/* newCode */
+/* .container .tbl {
+    border-bottom: 1px solid #ddd;
+    height: 200px; /* Set a fixed height for the table container */
+    /* overflow-y: auto; Enable vertical scrolling */
+/* } */
+
+/* .container .tbl table {
+    border-collapse: collapse;
+    width: 100%;
+} */
+
+/* .container .tbl table td {
+    padding: 6px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 12px; */
+/* } */ 
+/* newcode end */
+.header .PriceSection{
+    width: 82%;
+    height: 280px;
+    margin-top: 10px;
+    margin-bottom:10px;
+    margin-left: 210px;
+}
+.header .PriceSection .Box{
+    height: 273px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: white;
+    padding: 0px 25px;
+}
+.header .PriceSection .Box .navprc{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    border-bottom:1px solid #ddd;
+    padding: 15px 0px;
+}
+.header .PriceSection .Box .navprc .timer .clock{
+    background-color: #ddd;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}
+.header .PriceSection .Box .navprc .timer .dt{
+    background-color: #ddd;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    height: 21px;
+
+}
+.header .PriceSection .boxes{
+   margin: 10px 0px;
+}
+.header .PriceSection .dot{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 3px;
+}
+
+.header .PriceSection .dot .sqr{
+    height: 25px;
+    width: 259px;
+    border-radius: 5px;
+    background-color: rgb(240, 197, 9);
+    margin: 0px 2px;
+}
+.header .PriceSection .Box .text{
+    display: flex;
+    margin-top: 13px;
+}
+.header .PriceSection .Box .text .textbox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header .PriceSection .Box .text .textbox h6{
+  margin-left:5px ;
+}
+.header .PriceSection .Box .text .textbox .sqr33{
+    height: 13px;
+    width: 13px;
+    background-color:rgb(240, 197, 9);
+    border-radius: 3px;
+}
+.header .PriceSection .Box .text .textbox1{
+    display: flex;
+    align-items: center;
+    margin: 0px 6px;
+}
+.header .PriceSection .Box .text .textbox1 h6{
+    margin-left:5px ;
+  }
+.header .PriceSection .Box .text .textbox1 .sqr33{
+    height: 13px;
+    width: 13px;
+    background-color: rgb(236, 224, 169);
+    border-radius: 3px;
+}
+.header .fot{
+    display: flex;
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    align-items: center;
+}
+.header .fot h6{
+    margin-left: 170px;
+}
+.header .fot h6 span{
+    color: #575fd9;
+}
+.header .row2 .Block .inner{
+    margin: 0px 10px;
+}
+.header .row2 .Block .inner .navrow2{
+    padding: 10px 0px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 19px;
+}
+.header .row2 .Block .inner .segment{
+    display: flex;
+}
+.header .row2 .Block .inner h6{
+    margin: 3px 20px;
+}
+/* .header .row2 .Block .inner .segment .self{
+    height: 15px;
+    width: 129px;
+    background-color: rgb(172, 108, 172);
+    margin: 5px 7px;
+
+} */
+.header .row2 .Block .inner .segment1{
+    display: flex;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 7px;
+    margin-left: 69px;
+}
+.header .row2 .Block .inner .segment1 .self1 {
+    font-size:20.1px;
+}
+.header .row2 .Block .inner .segment1 .self1{
+    margin-right:10px;
+}
+.header .row2 .Block .inner .segment1 .self1 h6{
+    margin: 0px 0px;
+    color: #4a4949;
+}
+.stock0{
+    display: flex;
+    flex-direction: row;
+    color: #575fd9;
+}
+
+/* New Code */

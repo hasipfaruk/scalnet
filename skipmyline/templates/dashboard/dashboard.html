@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'dashboard/Design.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .container .tbl table td{
+            padding: 6px;
+            text-align: center !important;
+            border-bottom:1px solid #ddd ;
+            font-size: 12px;
+        }
+        .table-container {
+            max-height: 400px; /* Set your desired height */
+            overflow-x: scroll; /* Enable vertical scrolling */
+            border: 1px solid #ddd; /* Optional: Add a border for better visibility */
+        }
+        
+        .header .row2 .Block .inner .segment .self{
+            height: 22px;
+            width: 295px;
+            {% comment %} background-color: rgb(172, 108, 172); {% endcomment %}
+            margin: 4px 7px;
+            border-radius: 6px;
+        }
+        .header .row2 .Block .inner .segment .self {
+            height: 22px;
+            width: 175px;
+            margin: 5px 7px;
+            border-radius: 5px;
+        }
+        .header .row2 .Block .inner h6 {
+            margin: 7px 9px;
+            font-size: 13px;
+        }
+        .header .row2 .Block .inner .segment1 .self1 h6 {
+            margin: -11px 40px;
+            color: #4a4949;
+            font-size: 14px;
+            padding: 0px 5px;
+        }
+        .stock0{
+            display: flex;
+            flex-direction: row;
+
+        }
+        .stock0 p{
+            padding: 5px 10px;
+            font-size: 14px;
+            color:rgb(10, 10, 10);
+        }
+        .stock0 .stock0box{
+            height: 15px;
+            width: 15px;
+            background-color: green;
+            border-radius: 5px;
+            margin: 6px 0px;
+        }
+        .stock0 .stock1box{
+            height: 15px;
+            width: 15px;
+            background-color: orange;
+            border-radius: 5px;
+            margin: 6px 0px;
+        }
+        .stock0 .stock2box{
+            height: 15px;
+            width: 15px;
+            background-color: red;
+            border-radius: 5px;
+            margin: 6px 0px;
+        }
+        .stock0 .stock3box{
+            height: 15px;
+            width: 15px;
+            background-color: rgb(172, 108, 172);
+            border-radius: 5px;
+            margin: 6px 0px;
+        }
+        .header .row2 .Block .inner .segment1 .self1 h6 {
+            margin: -7px 40px;
+            color: #4a4949;
+            font-size: 11px;
+            padding: 2px 0px;
+        }
+        .header .PriceSection .dot .sqr {
+            height: 25px;
+            width: 259px;
+            border-radius: 5px;
+            background-color: rgb(240, 197, 9);
+            margin: 0px 2px;
+        }
+        {% comment %} /////// {% endcomment %}
+        /* Rack section styles */
+.header .row2 .Block .inner .segment .self {
+    height: 22px;
+    width: 175px;
+    margin: 5px 7px;
+    border-radius: 5px; /* Add rounded corners for better look */
+}
+
+/* Full stock - rgb(172, 108, 172) */
+.full_stock {
+    background-color: rgb(8, 138, 36);  /* Purple for full stock */
+}
+
+/* Low stock - RGB(224, 169, 224) */
+.low_stock {
+    background-color: rgb(240, 130, 4);  /* Light purple for low stock */
+}
+
+/* No stock - RGB(212, 197, 212) */
+.no_stock {
+    background-color: rgb(238, 10, 10);  /* Light gray for no stock */
+}
+
+/* Add hover effects for the rack colors */
+.header .row2 .Block .inner .segment .self:hover {
+    opacity: 0.8; /* Slight fade effect on hover */
+}
+.boxes .sqr p{
+padding: 0px 17px;
+}
+
+/* Optional: You can add styles for active or focused states if necessary */
+.header .row2 .Block .inner h6 {
+    margin: 7px 9px;
+    font-size: 13px;
+    font-family: "'Rubik'";
+}
+.boxes .dot .p{
+    padding: 0px 17px;
+}
+
+.default_color {
+    background-color: rgb(172, 108, 172);
+}
+
+    </style>
+    <title>SkipMyLine</title>
+</head>
+<body>
+    <div class="header">
+        <div class="sidebar">
+            <ul>
+                <li><i class='bx bxs-dashboard'></i><a  href="{% url 'dashboard' %} "class="bold-link">Dashboard</a></li>
+                <li><i class='bx bx-objects-horizontal-right'></i><a href="#">Shelf</a></li>
+                <li><i class='bx bxs-extension'></i><a href="#">Out Of Stock</a></li>
+                <li><i class='bx bxl-product-hunt'></i><a href="#">Product info</a></li>
+                <li><i class='bx bxs-store-alt'></i><a href="#">Price Mismatched</a></li>
+            </ul>
+        </div>
+
+        <nav class="navbar"></nav>
+
+        <!-- Products In Stock Section -->
+        <div class="rows">
+            <div class="col">
+                <p>PRODUCTS IN STOCK</p>
+                <h3>{{ total_products_in_stock }} Items</h3>
+
+                
+                {% comment %} <h6><i class='bx bx-trending-up'></i> {{ stock_increase_percentage }}% increase from last month</h6> {% endcomment %}
+                {% comment %} <h6><i class='bx bx-trending-down'></i> {{ stock_decrease_percentage }}% decrease from last month</h6> {% endcomment %}
+            </div>
+            <div class="col">
+                <p>PRODUCTS OUT OF STOCK</p>
+                <h3>{{ total_products_out_of_stock }} Products</h3>
+                {% comment %} <h6><i class='bx bx-trending-up'></i> {{ out_of_stock_increase_percentage }}% increase from last month</h6> {% endcomment %}
+                {% comment %} <h6><i class='bx bx-trending-down'></i> {{ out_of_stock_percentage }}% down</h6> {% endcomment %}
+            </div>
+            <div class="col">
+                <p>Sold-Out</p>
+                <h3>{{ shelves_out_of_stock_percentage }}</h3>
+                {% comment %} <h3>{{ ABC }}% Out-Of-Stock</h3> {% endcomment %}
+                {% comment %} <h6><i class='bx bx-trending-up'></i> {{ shelves_increase_percentage }}% increase from last month</h6> {% endcomment %}
+                {% comment %} <h6><i class='bx bx-trending-down'></i> ABC% decrease from last month</h6> {% endcomment %}
+            </div>
+        </div>
+
+        <!-- Shelf Out-Of-Stock Section -->
+        <div class="row2">
+            <div class="Block">
+                <div class="inner">
+                    <nav class="navrow2">
+                        <p>Shelf Info</p>
+                    </nav>
+                     {% comment %} <div class="segment">
+                        <h6>Rack 1</h6>
+                        <div class="self {% if rack_status.1 == 'full_stock' %}full_stock{% elif rack_status.1 == 'low_stock' %}low_stock{% elif rack_status.1 == 'no_stock' %}no_stock{% endif %}"></div>
+                        <div class="self {% if rack_status.2 == 'full_stock' %}full_stock{% elif rack_status.2 == 'low_stock' %}low_stock{% elif rack_status.2 == 'no_stock' %}no_stock{% endif %}"></div>
+                        <div class="self {% if rack_status.3 == 'full_stock' %}full_stock{% elif rack_status.3 == 'low_stock' %}low_stock{% elif rack_status.3 == 'no_stock' %}no_stock{% endif %}"></div>
+                    </div> {% endcomment %}
+                    <div class="segment">
+                        <h6>Rack 1</h6>
+                        <div class="self {% if rack_status.1 == '2' %}    full_stock{% elif rack_status.1 == '1' %}low_stock{% elif rack_status.1 == '0' %}    no_stock{% else %}    default_color{% endif %}"></div>
+                        <div class="self {% if rack_status.1 == '2' %}    full_stock{% elif rack_status.1 == '1' %}low_stock{% elif rack_status.1 == '0' %}    no_stock{% else %}    default_color{% endif %}"></div>
+                        <div class="self {% if rack_status.1 == '2' %}    full_stock{% elif rack_status.1 == '1' %}low_stock{% elif rack_status.1 == '0' %}    no_stock{% else %}    default_color{% endif %}"></div>
+
+                        {% comment %} <div class="self {% if rack_status.1 == 'full_stock' %}full_stock{% elif rack_status.1 == 'low_stock' %}low_stock{% elif rack_status.1 == 'no_stock' %}no_stock{% endif %}"></div> {% endcomment %}
+                        {% comment %} <div class="self {% if rack_status.2 == 'full_stock' %}full_stock{% elif rack_status.2 == 'low_stock' %}low_stock{% elif rack_status.2 == 'no_stock' %}no_stock{% endif %}"></div>
+                        <div class="self {% if rack_status.3 == 'full_stock' %}full_stock{% elif rack_status.3 == 'low_stock' %}low_stock{% elif rack_status.3 == 'no_stock' %}no_stock{% endif %}"></div> {% endcomment %}
+                    </div>
+                    
+                    <div class="segment">
+                        <h6>Rack 2</h6>
+                        {% comment %} <div class="self {% if rack_status.1 == 'full_stock' %}full_stock{% elif rack_status.1 == 'low_stock' %}low_stock{% elif rack_status.1 == 'no_stock' %}no_stock{% else %}default_color{% endif %}"></div> {% endcomment %}
+                        <div class="self {% if rack_status.2 == 'full_stock' %}    full_stock{% elif rack_status.2 == 'low_stock' %}low_stock{% elif rack_status.2 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+                        <div class="self {% if rack_status.2 == 'full_stock' %}    full_stock{% elif rack_status.2 == 'low_stock' %}low_stock{% elif rack_status.2 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+                        <div class="self {% if rack_status.2 == 'full_stock' %}    full_stock{% elif rack_status.2 == 'low_stock' %}low_stock{% elif rack_status.2 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+
+                        {% comment %} <div class="self"></div> {% endcomment %}
+                        {% comment %} <div class="self"></div>
+                        <div class="self"></div> {% endcomment %}
+                    </div>
+                    <div class="segment">
+                        <h6>Rack 3</h6>
+                        <div class="self {% if rack_status.3 == 'full_stock' %}    full_stock{% elif rack_status.3 == 'low_stock' %}no_stock{% elif rack_status.3 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+                        <div class="self {% if rack_status.3 == 'full_stock' %}    full_stock{% elif rack_status.3 == 'low_stock' %}no_stock{% elif rack_status.3 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+                        <div class="self {% if rack_status.3 == 'full_stock' %}    full_stock{% elif rack_status.3 == 'low_stock' %}no_stock{% elif rack_status.3 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+
+                        {% comment %} <div class="self"></div> {% endcomment %}
+                        {% comment %} <div class="self"></div>
+                        <div class="self"></div> {% endcomment %}
+                    </div>
+                    <div class="segment">
+                        <h6>Rack 4</h6>
+                        <div class="self {% if rack_status.4 == 'full_stock' %}    full_stock{% elif rack_status.4 == 'low_stock' %}low_stock{% elif rack_status.4 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+                        <div class="self {% if rack_status.4 == 'full_stock' %}    full_stock{% elif rack_status.4 == 'low_stock' %}low_stock{% elif rack_status.4 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+                        <div class="self {% if rack_status.4 == 'full_stock' %}    full_stock{% elif rack_status.4 == 'low_stock' %}low_stock{% elif rack_status.4 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+
+                        {% comment %} <div class="self"></div> {% endcomment %}
+                        {% comment %} <div class="self"></div>
+                        <div class="self"></div> {% endcomment %}
+                    </div>
+                    <div class="segment">
+                        <h6>Rack 5</h6>
+                        <div class="self {% if rack_status.5 == 'full_stock' %}    full_stock{% elif rack_status.5 == 'low_stock' %}low_stock{% elif rack_status.5 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+                        <div class="self {% if rack_status.5 == 'full_stock' %}    full_stock{% elif rack_status.5 == 'low_stock' %}low_stock{% elif rack_status.5 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+                        <div class="self {% if rack_status.5 == 'full_stock' %}    full_stock{% elif rack_status.5 == 'low_stock' %}low_stock{% elif rack_status.5 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
+
+                        {% comment %} <div class="self"></div> {% endcomment %}
+                        {% comment %} <div class="self"></div>
+                        <div class="self"></div> {% endcomment %}
+                    </div>
+                    
+                    <div class="segment1">
+                        {% comment %} <div class="self1"><h6>Full Stock</h6></div>
+                        <div class="self1"><h6>Low Stock</h6></div>
+                        <div class="self1"><h6>No Stock</h6></div> {% endcomment %}
+                       
+                    </div>
+                     <div class="stock0">
+                        <p>Full Stock</p>
+                    <div class="stock0box"></div>
+                        <p>Low Stock</p>
+                    <div class="stock1box">
+                        </div>
+                      <p>No Stock</p>
+                      <div class="stock2box"></div>
+                      <p>Default</p>
+                      <div class="stock3box"></div>
+                    </div> 
+                </div>
+            </div> 
+        
+        
+        <!-- Section Usage Section -->
+        
+            <div class="Block2">
+                    <div class="gren">
+                        <h5>Section Usage</h5>
+                        <div class="circle">
+                            <h3>{{ shelf_usage_percentage }}%</h3>
+                            <h6>Location Used</h6>
+                        </div>
+                        <div class="bot">
+                            <div class="bottext">
+                                <h6>Loaded</h6>
+                                <p>{{ loaded_shelves_count }} Shelves</p>
+                            </div>
+                            <div class="bottext">
+                                <h6>Empty</h6>
+                                <p>{{ empty_shelves_count }} Shelves</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        
+
+        <!-- Product In Stock Table -->
+        <div class="container">
+            <nav>
+                <p >Products Info:</p>
+                {% comment %} <input type="text" placeholder="Search"> {% endcomment %}
+            </nav>
+            <div class="tbl">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID #</th>
+                            <th>QR Code #</th>
+                            <th>Product Name</th>
+                            <th>Product Price </th>
+                            <th>Availability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ product.Code|default:"N/A" }}</td>
+                            <td>{{ product.P_name }}</td>
+                            <td>{{ product.P_price }}</td>
+                            <td>In Stock</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Price Mismatched Table -->
+        <div class="container">
+            <nav>
+                <p>Price Mismatch</p>
+                {% comment %} <input type="text" placeholder="Search"> {% endcomment %}
+            </nav>
+            <div class="tbl">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID #</th>
+                            <th>QR Code #</th>
+                            <th>Product Name</th>
+                            <th>Price Mismatched</th>
+                            <th>Actual Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ product.Code|default:"N/A" }}</td>
+                                    <td>{{ product.P_name }}</td>
+                                    <td>{{ product.Price|default:"N/A" }}</td>
+                                    <td>{{ product.P_price }}</td>
+                                </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+        <section class="PriceSection">
+            <div class="Box">
+                <nav class="navprc">
+                    <h5>Product Misplace</h5> <!-- Assuming 'title' is passed from the view -->
+                    
+                    {% comment %} <div class="timer">
+                        <input type="time" class="clock" id="liveClock" />
+                        <input type="date" class="dt" id="liveDate" />
+                    </div> {% endcomment %}
+                    
+                </nav>
+                <div class="boxes">
+                    <div class="dot">
+                        <p style="padding-right: 35px; font-family:'Rubik'; font-size: 17px">Rack 1</p>
+                        <div class="sqr" style="background-color: {% if rack_status.1 == 'full_stock' %}green{% elif rack_status.1 == 'low_stock' %}orange{% else %}red{% endif %};"></div>
+                        {% if mismatch_info.1 %}
+                            <p> {{ mismatch_info.1|join:", " }}</p>
+                        {% else %}
+                            {% comment %} <p>No mismatched products.</p> {% endcomment %}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="dot">
+                        <p style="padding-right: 35px; font-family:'Rubik'; font-size: 17px">Rack 2</p>
+                        <div class="sqr" style="background-color: {% if rack_status.2 == 'full_stock' %}green{% elif rack_status.2 == 'low_stock' %}orange{% else %}red{% endif %};"></div>
+                        {% if mismatch_info.2 %}
+                            <p> {{ mismatch_info.2|join:", " }}</p>
+                        {% else %}
+                            {% comment %} <p>No mismatched products.</p> {% endcomment %}
+                        {% endif %}
+                    </div>
+                    <div class="dot">
+                        <p style="padding-right: 35px; font-family:'Rubik'; font-size: 17px">Rack 3</p>
+                        <div class="sqr" style="background-color: {% if rack_status.3 == 'full_stock' %}green{% elif rack_status.3 == 'low_stock' %}orange{% else %}red{% endif %};"></div>
+                        {% if mismatch_info.3 %}
+                            <p> {{ mismatch_info.3|join:", " }}</p>
+                        {% else %}
+                            {% comment %} <p>No mismatched products.</p> {% endcomment %}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="dot">
+                        <p style="padding-right: 35px; font-family:'Rubik'; font-size: 17px">Rack 4</p>
+                        <div class="sqr" style="background-color: {% if rack_status.4 == 'full_stock' %}green{% elif rack_status.4 == 'low_stock' %}orange{% else %}red{% endif %};"></div>
+                        {% if mismatch_info.4 %}
+                            <p> {{ mismatch_info.4|join:", " }}</p>
+                        {% else %}
+                            {% comment %} <p>No mismatched products.</p> {% endcomment %}
+                        {% endif %}
+                    </div>
+                    <div class="dot">
+                        <p style="padding-right: 35px; font-family:'Rubik'; font-size: 17px">Rack 5</p>
+                        <div class="sqr" style="background-color: {% if rack_status.5 == 'full_stock' %}green{% elif rack_status.5 == 'low_stock' %}orange{% else %}red{% endif %};"></div>
+                        {% if mismatch_info.5 %}
+                            <p> {{ mismatch_info.5|join:", " }}</p>
+                        {% else %}
+                            {% comment %} <p>No mismatched products.</p> {% endcomment %}
+                        {% endif %}
+                    </div>
+                    
+                    {% comment %} <div class="text">
+                        <div class="textbox">
+                            <div class="sqr33"></div>
+                            <h6>{{ correctly_placed_text|default:'Correctly Placed' }}</h6> <!-- Use default text -->
+                        </div>
+                        <div class="textbox1">
+                            <div class="sqr33"></div>
+                            <h6>{{ misplaced_text|default:'Misplaced' }}</h6> <!-- Use default text -->
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </section>
+        
+
+        <footer class="fot">
+            <h6>© 2024 <span>Mexasol</span>. All Rights Reserved</h6>
+        </footer>
+    </div>
+    <script>
+        function updateLiveTimeAndDate() {
+            const clockInput = document.getElementById("liveClock");
+            const dateInput = document.getElementById("liveDate");
+            const now = new Date();
+    
+            // Format time as HH:MM for the <input type="time">
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            clockInput.value = `${hours}:${minutes}`;
+    
+            // Format date as YYYY-MM-DD for the <input type="date">
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const day = String(now.getDate()).padStart(2, '0');
+            dateInput.value = `${year}-${month}-${day}`;
+        }
+    
+        // Update the time and date fields every second
+        setInterval(updateLiveTimeAndDate, 1000);
+    
+        // Set the time and date immediately when the page loads
+        updateLiveTimeAndDate();
+    </script>
+    
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> {% endcomment %}
+</body>
+</html>
