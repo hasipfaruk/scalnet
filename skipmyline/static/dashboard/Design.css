@@ -195,12 +195,12 @@ p{
 }
 .container .tbl{
     border-bottom:1px solid #ddd ;
-    overflow-y: auto;
+    overflow: auto;
 }
 .container .tbl table {
     border-collapse: collapse;
     width: 100%;
-    overflow-y: auto;
+    overflow: auto;
 }
 .container .tbl table td{
     padding: 6px;

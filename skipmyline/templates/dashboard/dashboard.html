@@ -23,7 +23,6 @@
         .header .row2 .Block .inner .segment .self{
             height: 22px;
             width: 295px;
-            {% comment %} background-color: rgb(172, 108, 172); {% endcomment %}
             margin: 4px 7px;
             border-radius: 6px;
         }
@@ -77,7 +76,7 @@
         .stock0 .stock3box{
             height: 15px;
             width: 15px;
-            background-color: rgb(172, 108, 172);
+            background-color: #808080;
             border-radius: 5px;
             margin: 6px 0px;
         }
@@ -103,20 +102,26 @@
     border-radius: 5px; /* Add rounded corners for better look */
 }
 
-/* Full stock - rgb(172, 108, 172) */
+/* Full stock - Green */
 .full_stock {
-    background-color: rgb(8, 138, 36);  /* Purple for full stock */
+    background-color: rgb(8, 138, 36); /* Green for full stock */
 }
 
-/* Low stock - RGB(224, 169, 224) */
+/* Low stock - Orange */
 .low_stock {
-    background-color: rgb(240, 130, 4);  /* Light purple for low stock */
+    background-color: rgb(240, 130, 4); /* Orange for low stock */
 }
 
-/* No stock - RGB(212, 197, 212) */
+/* No stock - Red */
 .no_stock {
-    background-color: rgb(238, 10, 10);  /* Light gray for no stock */
+    background-color: rgb(238, 10, 10); /* Red for no stock */
 }
+
+/* Default color - Gray */
+.default_color {
+    background-color: rgb(200, 200, 200); /* Gray for undefined stock status */
+}
+
 
 /* Add hover effects for the rack colors */
 .header .row2 .Block .inner .segment .self:hover {
@@ -137,7 +142,12 @@ padding: 0px 17px;
 }
 
 .default_color {
-    background-color: rgb(172, 108, 172);
+    background-color: #808080;
+}
+.tbl {
+    {% comment %} border: 1px solid red; {% endcomment %}
+    height: 220px;
+    overflow: auto;
 }
 
     </style>
@@ -189,69 +199,76 @@ padding: 0px 17px;
                     <nav class="navrow2">
                         <p>Shelf Info</p>
                     </nav>
-                     {% comment %} <div class="segment">
-                        <h6>Rack 1</h6>
-                        <div class="self {% if rack_status.1 == 'full_stock' %}full_stock{% elif rack_status.1 == 'low_stock' %}low_stock{% elif rack_status.1 == 'no_stock' %}no_stock{% endif %}"></div>
-                        <div class="self {% if rack_status.2 == 'full_stock' %}full_stock{% elif rack_status.2 == 'low_stock' %}low_stock{% elif rack_status.2 == 'no_stock' %}no_stock{% endif %}"></div>
-                        <div class="self {% if rack_status.3 == 'full_stock' %}full_stock{% elif rack_status.3 == 'low_stock' %}low_stock{% elif rack_status.3 == 'no_stock' %}no_stock{% endif %}"></div>
-                    </div> {% endcomment %}
+                    
                     <div class="segment">
                         <h6>Rack 1</h6>
-                        <div class="self {% if rack_status.1 == '2' %}    full_stock{% elif rack_status.1 == '1' %}low_stock{% elif rack_status.1 == '0' %}    no_stock{% else %}    default_color{% endif %}"></div>
-                        <div class="self {% if rack_status.1 == '2' %}    full_stock{% elif rack_status.1 == '1' %}low_stock{% elif rack_status.1 == '0' %}    no_stock{% else %}    default_color{% endif %}"></div>
-                        <div class="self {% if rack_status.1 == '2' %}    full_stock{% elif rack_status.1 == '1' %}low_stock{% elif rack_status.1 == '0' %}    no_stock{% else %}    default_color{% endif %}"></div>
-
-                        {% comment %} <div class="self {% if rack_status.1 == 'full_stock' %}full_stock{% elif rack_status.1 == 'low_stock' %}low_stock{% elif rack_status.1 == 'no_stock' %}no_stock{% endif %}"></div> {% endcomment %}
-                        {% comment %} <div class="self {% if rack_status.2 == 'full_stock' %}full_stock{% elif rack_status.2 == 'low_stock' %}low_stock{% elif rack_status.2 == 'no_stock' %}no_stock{% endif %}"></div>
-                        <div class="self {% if rack_status.3 == 'full_stock' %}full_stock{% elif rack_status.3 == 'low_stock' %}low_stock{% elif rack_status.3 == 'no_stock' %}no_stock{% endif %}"></div> {% endcomment %}
+                        {% if rack_status.1 %}
+                            {% for product, status in rack_status.1 %}
+                                <div class="self {{ status }}" title="{{ product }}"></div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="self default_color"></div>
+                            <div class="self default_color"></div>
+                            
+                        {% endif %}
                     </div>
                     
                     <div class="segment">
                         <h6>Rack 2</h6>
-                        {% comment %} <div class="self {% if rack_status.1 == 'full_stock' %}full_stock{% elif rack_status.1 == 'low_stock' %}low_stock{% elif rack_status.1 == 'no_stock' %}no_stock{% else %}default_color{% endif %}"></div> {% endcomment %}
-                        <div class="self {% if rack_status.2 == 'full_stock' %}    full_stock{% elif rack_status.2 == 'low_stock' %}low_stock{% elif rack_status.2 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-                        <div class="self {% if rack_status.2 == 'full_stock' %}    full_stock{% elif rack_status.2 == 'low_stock' %}low_stock{% elif rack_status.2 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-                        <div class="self {% if rack_status.2 == 'full_stock' %}    full_stock{% elif rack_status.2 == 'low_stock' %}low_stock{% elif rack_status.2 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-
-                        {% comment %} <div class="self"></div> {% endcomment %}
-                        {% comment %} <div class="self"></div>
-                        <div class="self"></div> {% endcomment %}
-                    </div>
-                    <div class="segment">
-                        <h6>Rack 3</h6>
-                        <div class="self {% if rack_status.3 == 'full_stock' %}    full_stock{% elif rack_status.3 == 'low_stock' %}no_stock{% elif rack_status.3 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-                        <div class="self {% if rack_status.3 == 'full_stock' %}    full_stock{% elif rack_status.3 == 'low_stock' %}no_stock{% elif rack_status.3 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-                        <div class="self {% if rack_status.3 == 'full_stock' %}    full_stock{% elif rack_status.3 == 'low_stock' %}no_stock{% elif rack_status.3 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-
-                        {% comment %} <div class="self"></div> {% endcomment %}
-                        {% comment %} <div class="self"></div>
-                        <div class="self"></div> {% endcomment %}
-                    </div>
-                    <div class="segment">
-                        <h6>Rack 4</h6>
-                        <div class="self {% if rack_status.4 == 'full_stock' %}    full_stock{% elif rack_status.4 == 'low_stock' %}low_stock{% elif rack_status.4 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-                        <div class="self {% if rack_status.4 == 'full_stock' %}    full_stock{% elif rack_status.4 == 'low_stock' %}low_stock{% elif rack_status.4 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-                        <div class="self {% if rack_status.4 == 'full_stock' %}    full_stock{% elif rack_status.4 == 'low_stock' %}low_stock{% elif rack_status.4 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-
-                        {% comment %} <div class="self"></div> {% endcomment %}
-                        {% comment %} <div class="self"></div>
-                        <div class="self"></div> {% endcomment %}
-                    </div>
-                    <div class="segment">
-                        <h6>Rack 5</h6>
-                        <div class="self {% if rack_status.5 == 'full_stock' %}    full_stock{% elif rack_status.5 == 'low_stock' %}low_stock{% elif rack_status.5 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-                        <div class="self {% if rack_status.5 == 'full_stock' %}    full_stock{% elif rack_status.5 == 'low_stock' %}low_stock{% elif rack_status.5 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-                        <div class="self {% if rack_status.5 == 'full_stock' %}    full_stock{% elif rack_status.5 == 'low_stock' %}low_stock{% elif rack_status.5 == 'no_stock' %}    no_stock{% else %}    default_color{% endif %}"></div>
-
-                        {% comment %} <div class="self"></div> {% endcomment %}
-                        {% comment %} <div class="self"></div>
-                        <div class="self"></div> {% endcomment %}
+                        {% if rack_status.2 %}
+                            {% for product, status in rack_status.2 %}
+                                <div class="self {{ status }}" title="{{ product }}"></div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="self default_color"></div>
+                            <div class="self default_color"></div>
+                            
+                        {% endif %}
                     </div>
                     
+                    <div class="segment">
+                        <h6>Rack 3</h6>
+                        {% if rack_status.3 %}
+                            {% for product, status in rack_status.3 %}
+                                <div class="self {{ status }}" title="{{ product }}"></div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="self default_color"></div>
+                            <div class="self default_color"></div>
+                            
+                        {% endif %}
+                    </div>
+                    
+                    <div class="segment">
+                        <h6>Rack 4</h6>
+                        {% if rack_status.4 %}
+                            {% for product, status in rack_status.4 %}
+                                <div class="self {{ status }}" title="{{ product }}"></div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="self default_color"></div>
+                            <div class="self default_color"></div>
+                            
+                        {% endif %}
+                    </div>
+                    
+                    <div class="segment">
+                        <h6>Rack 5</h6>
+                        {% if rack_status.5 %}
+                            {% for product, status in rack_status.5 %}
+                                <div class="self {{ status }}" title="{{ product }}"></div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="self default_color"></div>
+                            <div class="self default_color"></div>
+                            
+                        {% endif %}
+                    </div>
+                    
+                    
+                    
                     <div class="segment1">
-                        {% comment %} <div class="self1"><h6>Full Stock</h6></div>
-                        <div class="self1"><h6>Low Stock</h6></div>
-                        <div class="self1"><h6>No Stock</h6></div> {% endcomment %}
+                        
                        
                     </div>
                      <div class="stock0">
@@ -294,13 +311,12 @@ padding: 0px 17px;
         
 
         <!-- Product In Stock Table -->
-        <div class="container">
+        <div class="container" >
             <nav>
                 <p >Products Info:</p>
-                {% comment %} <input type="text" placeholder="Search"> {% endcomment %}
             </nav>
-            <div class="tbl">
-                <table>
+            <div class="tbl" >
+                <table >
                     <thead>
                         <tr>
                             <th>ID #</th>
@@ -317,13 +333,21 @@ padding: 0px 17px;
                             <td>{{ product.Code|default:"N/A" }}</td>
                             <td>{{ product.P_name }}</td>
                             <td>{{ product.P_price }}</td>
-                            <td>In Stock</td>
+                            <td>
+                                {% if product.stock_level == 0 %}
+                                    Out of Stock
+                                {% else %}
+                                    In Stock
+                                {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> 
+        
+        
 
         <!-- Price Mismatched Table -->
         <div class="container">
@@ -332,7 +356,7 @@ padding: 0px 17px;
                 {% comment %} <input type="text" placeholder="Search"> {% endcomment %}
             </nav>
             <div class="tbl">
-                <table>
+                <table style="overflow: auto";>
                     <thead>
                         <tr>
                             <th>ID #</th>
@@ -361,12 +385,6 @@ padding: 0px 17px;
             <div class="Box">
                 <nav class="navprc">
                     <h5>Product Misplace</h5> <!-- Assuming 'title' is passed from the view -->
-                    
-                    {% comment %} <div class="timer">
-                        <input type="time" class="clock" id="liveClock" />
-                        <input type="date" class="dt" id="liveDate" />
-                    </div> {% endcomment %}
-                    
                 </nav>
                 <div class="boxes">
                     <div class="dot">
@@ -416,17 +434,7 @@ padding: 0px 17px;
                             {% comment %} <p>No mismatched products.</p> {% endcomment %}
                         {% endif %}
                     </div>
-                    
-                    {% comment %} <div class="text">
-                        <div class="textbox">
-                            <div class="sqr33"></div>
-                            <h6>{{ correctly_placed_text|default:'Correctly Placed' }}</h6> <!-- Use default text -->
-                        </div>
-                        <div class="textbox1">
-                            <div class="sqr33"></div>
-                            <h6>{{ misplaced_text|default:'Misplaced' }}</h6> <!-- Use default text -->
-                        </div>
-                    </div> {% endcomment %}
+
                 </div>
             </div>
         </section>
@@ -436,31 +444,6 @@ padding: 0px 17px;
             <h6>© 2024 <span>Mexasol</span>. All Rights Reserved</h6>
         </footer>
     </div>
-    <script>
-        function updateLiveTimeAndDate() {
-            const clockInput = document.getElementById("liveClock");
-            const dateInput = document.getElementById("liveDate");
-            const now = new Date();
-    
-            // Format time as HH:MM for the <input type="time">
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            clockInput.value = `${hours}:${minutes}`;
-    
-            // Format date as YYYY-MM-DD for the <input type="date">
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-            const day = String(now.getDate()).padStart(2, '0');
-            dateInput.value = `${year}-${month}-${day}`;
-        }
-    
-        // Update the time and date fields every second
-        setInterval(updateLiveTimeAndDate, 1000);
-    
-        // Set the time and date immediately when the page loads
-        updateLiveTimeAndDate();
-    </script>
-    
     {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> {% endcomment %}
 </body>
 </html>
