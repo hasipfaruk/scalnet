@@ -109,7 +109,7 @@ def dashboard(request):
                         product["stock_level"] = stock_item[1]
 
     # Calculate percentage for shelf usage
-    total_shelves = 4  # Assuming there are 4 racks as per the example
+    total_shelves = 5  # Assuming there are 5 racks as per the example
     loaded_shelves_count = total_shelves - len(empty_shelves)
     shelf_usage_percentage = (loaded_shelves_count / total_shelves) * 100
 
